@@ -13,7 +13,8 @@ class InitSpark:
             .set('spark.app.name', 'Kschool-TFM') \
             .set('spark.master', 'local[*]') \
             .set('spark.executor.memory', '4g') \
-            .set('spark.rdd.compress', 'True')
+            .set('spark.rdd.compress', 'True') \
+            .set('spark.ui.port', '4041')
 
         self.sc = SparkContext(conf=self.conf)
 
