@@ -21,3 +21,15 @@ class InitSpark:
         self.sqlContext = SQLContext(self.sc)
 
         self.spark = self.sqlContext.sparkSession
+    
+    def getSparkSession(self):
+        return self.spark
+    
+    def getSqlContext(self):
+        return self.sqlContext
+    
+    def getSparkContext(self):
+        return self.sc
+    
+    def getSparkConf(self):
+        return self.conf
