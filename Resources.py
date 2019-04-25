@@ -1,8 +1,5 @@
 from pyspark.sql.types import *
 
-train_path = "Data/train.csv.gz"
-test_path = "Data/test.csv.gz"
-
 df_schema = StructType([
     StructField("MachineIdentifier", StringType(), nullable = True),
     StructField("ProductName", StringType(), nullable = True),
