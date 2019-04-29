@@ -1,5 +1,5 @@
-from pyspark.sql import SparkSession, SQLContext
 from pyspark import SparkConf, SparkContext
+from pyspark.sql import SparkSession, SQLContext
 
 
 class InitSpark:
@@ -21,15 +21,15 @@ class InitSpark:
         self.sqlContext = SQLContext(self.sc)
 
         self.spark = self.sqlContext.sparkSession
-    
-    def getSparkSession(self):
+
+    def get_spark_session(self):
         return self.spark
-    
-    def getSqlContext(self):
+
+    def get_sql_context(self):
         return self.sqlContext
-    
-    def getSparkContext(self):
+
+    def get_spark_context(self):
         return self.sc
-    
-    def getSparkConf(self):
+
+    def get_spark_conf(self):
         return self.conf

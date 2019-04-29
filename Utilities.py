@@ -10,15 +10,16 @@ def get_splitted_fields(schema):
 
     return id_field, input_fields, target_field
 
+
 def get_input_fields_dict(df, option, correlations=None, default_values=None):
     if option == 'in_model':
         result = {field.name: True for field in df.schema.fields[1:-1]}
     elif option == 'types':
         result = {field.name: field.dataType for field in df.schema.fields[1:-1]}
     elif option == 'correlation':
-        result = {k.name: abs(v) for k,v in zip(df.schema.fields[:-1], correlations)}
+        result = {k.name: abs(v) for k, v in zip(df.schema.fields[:-1], correlations)}
     elif option == 'correlation_ordered':
-        corr = {k.name: abs(v) for k,v in zip(df.schema.fields[:-1], correlations)}
+        corr = {k.name: abs(v) for k, v in zip(df.schema.fields[:-1], correlations)}
         result = {k: v for v, k in enumerate(sorted(corr, key=corr.get, reverse=True))}
     elif option == 'default_values':
         result = {field.name: default_values[field.dataType] for field in df.schema.fields}
@@ -27,11 +28,14 @@ def get_input_fields_dict(df, option, correlations=None, default_values=None):
 
     return result
 
+
 def get_select_fields(in_model_dict):
     return [k for k in in_model_dict.keys() if in_model_dict[k]]
 
+
 def get_sample(df, fields, percentage):
     return df.select(*fields).sample(percentage)
+
 
 def get_x_y_train(df, input_fields, target_field):
     panda_df = df.toPandas()
@@ -39,6 +43,7 @@ def get_x_y_train(df, input_fields, target_field):
     y_train = panda_df[[target_field]]
 
     return x_train, y_train
+
 
 def get_grid_search_cv(classifier, param_grid, score_dict, score_refit, cv):
     return GridSearchCV(classifier(),
@@ -48,14 +53,16 @@ def get_grid_search_cv(classifier, param_grid, score_dict, score_refit, cv):
                         cv=cv,
                         n_jobs=-1)
 
+
 def get_randomized_search_cv(classifier, param_grid, score_dict, score_refit, cv, n_iter):
     return RandomizedSearchCV(classifier(),
-                        param_distributions=param_grid,
-                        scoring=score_dict,
-                        refit=score_refit,
-                        n_iter=n_iter,
-                        cv=cv,
-                        n_jobs=-1)
+                              param_distributions=param_grid,
+                              scoring=score_dict,
+                              refit=score_refit,
+                              n_iter=n_iter,
+                              cv=cv,
+                              n_jobs=-1)
+
 
 def print_scores(results, scores, score_refit):
     test_prefix = 'mean_test_%s'
@@ -69,10 +76,12 @@ def print_scores(results, scores, score_refit):
         formatted_scores = [f(score) for score in test_scores]
         best_test_score = max(formatted_scores)
         score_for_score_refit = formatted_scores[index]
-        print('best_%s: %s, %s_based_on_%s: %s' % (score, str(best_test_score), score, score_refit, str(score_for_score_refit)))
+        print('best_%s: %s, %s_based_on_%s: %s' % (
+            score, str(best_test_score), score, score_refit, str(score_for_score_refit)))
         plt.plot(formatted_scores, label=score)
     plt.legend()
     plt.show()
+
 
 def get_na_fields(option):
     if option:
@@ -82,4 +91,3 @@ def get_na_fields(option):
         return na_fields
     else:
         return []
-
