@@ -105,5 +105,7 @@ venv.bak/
 .mypy_cache/
 
 .DS_Store
+Data/
+Analysis/
 
 *.csv.gz
