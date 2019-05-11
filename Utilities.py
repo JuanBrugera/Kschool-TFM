@@ -3,6 +3,9 @@ from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
 
 
 def get_splitted_fields(schema):
+    """
+    This method returns id_field, input_fields and target_field givan an schema
+    """
     fields = [field.name for field in schema.fields]
     id_field = fields[0]
     input_fields = fields[1:-1]
@@ -12,6 +15,18 @@ def get_splitted_fields(schema):
 
 
 def get_input_fields_dict(df, option, correlations=None, default_values=None):
+    """
+    Return distinct dicts (option).
+    df = DataFrame from dict will be given
+    option = determinates the dict will be returned
+        in_model -> {field: True for field in input_fields}
+        types -> {field: Type for field in input_fields}
+        correlation -> {field: double for field in input_fields}
+        correlation_ordered -> {field: integer for field in input_fields} sorted descending correlation[field]
+        default_values -> {field: default_value for field in input_fields}
+    correlations (None) = Mandatory when option is "correlation" or "correlation_ordered". List with the correlation between       input_fields and target.
+    default_values (None) = Mandatory when option is "default_values". Dict with default values for each type of data.
+    """
     if option == 'in_model':
         result = {field.name: True for field in df.schema.fields[1:-1]}
     elif option == 'types':
@@ -30,14 +45,23 @@ def get_input_fields_dict(df, option, correlations=None, default_values=None):
 
 
 def get_select_fields(in_model_dict):
+    """
+    Given an in_model dict, this method returns in_model[k] if it's True
+    """
     return [k for k in in_model_dict.keys() if in_model_dict[k]]
 
 
 def get_sample(df, fields, percentage):
+    """
+    Returns df.select(*fields).sample(percentage)
+    """
     return df.select(*fields).sample(percentage)
 
 
 def get_x_y_train(df, input_fields, target_field):
+    """
+    This method returns x_train and y_train given a DataFrame, input_fields and target_field
+    """
     panda_df = df.toPandas()
     x_train = panda_df[input_fields]
     y_train = panda_df[[target_field]]
@@ -76,7 +100,7 @@ def print_scores(results, scores, score_refit):
         formatted_scores = [f(score) for score in test_scores]
         best_test_score = max(formatted_scores)
         score_for_score_refit = formatted_scores[index]
-        print('best_%s: %s, %s_based_on_%s: %s' % (
+        print('best_%s: %s, %s_based_on_best_%s: %s' % (
             score, str(best_test_score), score, score_refit, str(score_for_score_refit)))
         plt.plot(formatted_scores, label=score)
     plt.legend()
