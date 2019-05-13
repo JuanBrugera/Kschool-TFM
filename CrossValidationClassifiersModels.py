@@ -100,7 +100,7 @@ class CrossValidationClassifiersModels:
         self.ColumnsToUse = columnsToUse
         
     def init_CrossValidationsClassifiers_by_default(self, crossValidationsClassifiers = {}):
-        if (crossValidationsClassifiers = {}):
+        if (crossValidationsClassifiers == {}):
             self.CrossValidationsClassifiers = {
                     ClassifierModel(clasifier=DecisionTreeClassifier ,
                             paramGrid={
