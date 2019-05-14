@@ -94,3 +94,7 @@ Unavailable or self-documenting column names are marked with an "NA".
 81. Wdft_IsGamer - Indicates whether the device is a gamer device or not based on its hardware combination.
 82. Wdft_RegionIdentifier - NA
 83. **HasDetections** is the ground truth and indicates that Malware was detected on the machine.
+
+## Leader Board
+
+https://www.kaggle.com/c/microsoft-malware-prediction/leaderboard

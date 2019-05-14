@@ -105,6 +105,25 @@ def print_scores(results, scores, score_refit):
         plt.plot(formatted_scores, label=score)
     plt.legend()
     plt.show()
+    
+
+def print_evolution(results, score):
+    test_prefix = 'mean_test_%s'
+    f = lambda x: float(x)
+    score_refit_scores = str(results[test_prefix % score_refit])[1:-1].split()
+    formatted = [f(score) for score in score_refit_scores]
+    best_score_refit_score = max(formatted)
+    index = formatted.index(best_score_refit_score)
+    for score in scores.keys():
+        test_scores = str(results[test_prefix % score])[1:-1].split()
+        formatted_scores = [f(score) for score in test_scores]
+        best_test_score = max(formatted_scores)
+        score_for_score_refit = formatted_scores[index]
+        print('best_%s: %s, %s_based_on_best_%s: %s' % (
+            score, str(best_test_score), score, score_refit, str(score_for_score_refit)))
+        plt.plot(formatted_scores, label=score)
+    plt.legend()
+    plt.show()
 
 
 def get_na_fields(option):
