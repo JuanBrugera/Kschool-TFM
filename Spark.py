@@ -11,10 +11,12 @@ class InitSpark:
     def __init__(self):
         self.conf = SparkConf() \
             .set('spark.app.name', 'Kschool-TFM') \
-            .set('spark.master', 'local[*]') \
-            .set('spark.executor.memory', '4g') \
+            .set('spark.master', 'local[4]') \
+            .set('spark.driver.memory', '8g') \
             .set('spark.rdd.compress', 'True') \
-            .set('spark.ui.port', '4041')
+            .set('spark.ui.port', '4041') \
+            #.set('spark.executor.memory', '6g') \
+
 
         self.sc = SparkContext(conf=self.conf)
 
