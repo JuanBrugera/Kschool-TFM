@@ -70,6 +70,9 @@ def get_x_y_train(df, input_fields, target_field):
 
 
 def get_grid_search_cv(classifier, param_grid, score_dict, score_refit, cv):
+    """
+    Returns an instace of GridSearchCV with the given params
+    """
     return GridSearchCV(classifier(),
                         param_grid=param_grid,
                         scoring=score_dict,
@@ -79,6 +82,9 @@ def get_grid_search_cv(classifier, param_grid, score_dict, score_refit, cv):
 
 
 def get_randomized_search_cv(classifier, param_grid, score_dict, score_refit, cv, n_iter):
+    """
+    Returns an instace of RandomizedSearchCV with the given params
+    """
     return RandomizedSearchCV(classifier(),
                               param_distributions=param_grid,
                               scoring=score_dict,
@@ -89,6 +95,9 @@ def get_randomized_search_cv(classifier, param_grid, score_dict, score_refit, cv
 
 
 def print_scores(results, scores, score_refit):
+    """
+    Plots test score evolution from a CV search
+    """
     test_prefix = 'mean_test_%s'
     f = lambda x: float(x)
     score_refit_scores = str(results[test_prefix % score_refit])[1:-1].split()
@@ -107,26 +116,10 @@ def print_scores(results, scores, score_refit):
     plt.show()
     
 
-def print_evolution(results, score):
-    test_prefix = 'mean_test_%s'
-    f = lambda x: float(x)
-    score_refit_scores = str(results[test_prefix % score_refit])[1:-1].split()
-    formatted = [f(score) for score in score_refit_scores]
-    best_score_refit_score = max(formatted)
-    index = formatted.index(best_score_refit_score)
-    for score in scores.keys():
-        test_scores = str(results[test_prefix % score])[1:-1].split()
-        formatted_scores = [f(score) for score in test_scores]
-        best_test_score = max(formatted_scores)
-        score_for_score_refit = formatted_scores[index]
-        print('best_%s: %s, %s_based_on_best_%s: %s' % (
-            score, str(best_test_score), score, score_refit, str(score_for_score_refit)))
-        plt.plot(formatted_scores, label=score)
-    plt.legend()
-    plt.show()
-
-
 def get_na_fields(option):
+    """
+    Returns [fields] marked as NA in README.md if option is True. In other case, returns []
+    """
     if option:
         with open('README.md', 'r') as f:
             text = f.read().split('\n')
