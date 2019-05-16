@@ -26,7 +26,7 @@ conda activate mimape # source activate if conda version earlier than 4.6
 conda install jupyter
 conda install seaborn
 conda install matplotlib
-conda install sklearn
+conda install scikit-learn
 conda install xgboost
 conda install pandas
 conda install numpy
@@ -50,7 +50,7 @@ These are the most important (and the only should be modified):
 ````python
 cv = 3 # Loops in data for cross validation searches
 n_iter = 30 # Number of parameter settings that are sampled in RandomizedSearchCV
-sample_size = .1 # (percentage) due to the large volume of data
+sample_size = .1 # train sample percentage due to the large volume of data
 cut_at = .01 # variable weight (percentage) to be in model
 ````
 ## 5. Process
@@ -88,7 +88,9 @@ We also predict against test and we achieve a score of ~0.65.
 After obtaining certain conclusions, we launched the process with Spark and with those hyper parameters with which we hope to obtain better results.
 
 ## 6. Front-End
-TBD - Javier Muñoz Alonso
+A reporting visualization tool with some statistics about process is available at [this link](http://tfmkschool2019.azurewebsites.net/).
+
+It's interactive so you can pass the mouse over graphics and select or unselect the things you want to see clicking in the coloured circles.
 
 ## 7. Conclusions
 
