@@ -88,9 +88,9 @@ We also predict against test and we achieve a score of ~0.65.
 After obtaining certain conclusions, we launched the process with Spark and with those hyper parameters with which we hope to obtain better results.
 
 ## 6. Front-End
-A reporting visualization tool with some statistics about process is available at [this link](http://tfmkschool2019.azurewebsites.net/)
+A reporting visualization tool with some statistics about process is available at [this link](http://tfmkschool2019.azurewebsites.net/).
 
-It's interactive so you can pass the mouse over graphics and select or unselect the things you want to see clicking in the coloured circles
+It's interactive so you can pass the mouse over graphics and select or unselect the things you want to see clicking in the coloured circles.
 
 ## 7. Conclusions
 
