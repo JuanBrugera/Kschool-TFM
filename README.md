@@ -84,7 +84,7 @@ We decided to try all the features obtaining the weights of each of them for eac
 
 We also predict against test and we achieve a score of ~0.65.
 
-## 5.6 After exploration, optimization
+### 5.6 After exploration, optimization
 After obtaining certain conclusions, we launched the process with Spark and with those hyper parameters with which we hope to obtain better results.
 
 ## 6. Front-End
